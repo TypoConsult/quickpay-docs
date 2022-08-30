@@ -60,9 +60,6 @@ const config = {
                         label: 'Docs'
                     },
                     {
-                        type: 'docsVersionDropdown'
-                    },
-                    {
                         href: 'https://github.com/TypoConsult/quickpay',
                         label: 'GitHub',
                         position: 'right'
