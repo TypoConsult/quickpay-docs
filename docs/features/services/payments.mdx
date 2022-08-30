@@ -1,0 +1,171 @@
+---
+sidebar_position: 1
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Payments
+
+The `Client` instance provides a `payments` object to interact directly with Quickpay payments.
+
+The available functions are listed below with descriptions, examples, arguments and expected return values.
+
+:::tip
+
+Make sure that you have a correct setup with a client based on the [usage page](/docs/getting-started/usage)
+
+:::
+
+## get
+
+Fetch all data for a specific payment
+
+<Tabs>
+<TabItem value="example" label="Example">
+
+```php
+$response = $client->payments->get($id);
+```
+
+</TabItem>
+
+<TabItem value="args" label="Arguments">
+
+| name | type   | required | default |
+|------|--------|----------|---------|
+| id   | number | `true`   | -       |
+
+</TabItem>
+
+<TabItem value="return" label="Return">
+
+Instance of `Psr\Http\Message\ResponseInterface` with raw data from Quickpay API.
+
+</TabItem>
+</Tabs>
+
+## create
+
+Creates a new payment. This is rarely used alone, since it will only create a payment in Quickpay, but without any way
+for the user to submit payments.
+
+Please refer to the [`createLink`](/docs/features/services/payments#createlink) function below, which will both create
+the payment and return a link for the user to use for
+payments.
+
+<Tabs>
+<TabItem value="example" label="Example">
+
+```php
+$response = $client->payments->create($input);
+```
+
+</TabItem>
+
+<TabItem value="args" label="Arguments">
+
+| name  | type                                               | required | default |
+|-------|----------------------------------------------------|----------|---------|
+| input | [PaymentInput](/docs/features/types/payment-input) | `true`   | -       |
+
+</TabItem>
+
+<TabItem value="return" label="Return">
+
+Instance of `Psr\Http\Message\ResponseInterface` with raw data from Quickpay API.
+
+</TabItem>
+</Tabs>
+
+## createLink
+
+Creates a new payment and a link to the payment form to be used for paying.
+
+<Tabs>
+<TabItem value="example" label="Example">
+
+```php
+$response = $client->payments->createLink($input);
+```
+
+</TabItem>
+
+<TabItem value="args" label="Arguments">
+
+| name  | type                                                        | required | default |
+|-------|-------------------------------------------------------------|----------|---------|
+| input | [PaymentLinkInput](/docs/features/types/payment-link-input) | `true`   | -       |
+
+</TabItem>
+
+<TabItem value="return" label="Return">
+
+Instance of `Psr\Http\Message\ResponseInterface` with raw data from Quickpay API.
+
+</TabItem>
+</Tabs>
+
+## updateLink
+
+Updates an existing payment link.
+
+<Tabs>
+<TabItem value="example" label="Example">
+
+```php
+$response = $client->payments->updateLink($id, $input);
+```
+
+</TabItem>
+
+<TabItem value="args" label="Arguments">
+
+| name  | type                                                        | required | default |
+|-------|-------------------------------------------------------------|----------|---------|
+| id    | number                                                      | `true`   | -       |
+| input | [PaymentLinkInput](/docs/features/types/payment-link-input) | `true`   | -       |
+
+</TabItem>
+
+<TabItem value="return" label="Return">
+
+Instance of `Psr\Http\Message\ResponseInterface` with raw data from Quickpay API.
+
+</TabItem>
+</Tabs>
+
+## capture
+
+Captures a partial or full amount of an existing payment.
+
+<Tabs>
+<TabItem value="example" label="Example">
+
+```php
+$response = $client->payments->capture($id, $amount);
+```
+
+</TabItem>
+
+<TabItem value="args" label="Arguments">
+
+| name   | type   | required | default | description                                                                |
+|--------|--------|----------|---------|----------------------------------------------------------------------------|
+| id     | number | `true`   | -       |                                                                            |
+| amount | number | `false`  | `null`  | If not provided, it will attempt to capture the full amount of the payment |
+
+</TabItem>
+
+<TabItem value="return" label="Return">
+
+**On success**
+
+Instance of `Psr\Http\Message\ResponseInterface` with raw data from Quickpay API.
+
+**On failure**
+
+`null`
+
+</TabItem>
+</Tabs>
