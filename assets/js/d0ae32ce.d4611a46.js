@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkquickpay_docs=self.webpackChunkquickpay_docs||[]).push([[999],{8264:e=>{e.exports=JSON.parse('{"title":"Features","slug":"/category/features","permalink":"/docs/category/features","navigation":{"previous":{"title":"Usage","permalink":"/docs/getting-started/usage"},"next":{"title":"Services","permalink":"/docs/category/services"}}}')}}]);
