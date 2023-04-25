@@ -12,7 +12,7 @@ interactions.
 Import the `Client` class from the autoloaded namespace:
 
 ```php
-use TypoConsult\QuickPay\Client;
+use TypoConsult\Quickpay\Client;
 ```
 
 ## Initialize

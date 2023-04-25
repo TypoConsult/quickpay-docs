@@ -12,7 +12,7 @@ the [createLink function](/docs/features/services/payments#createlink) will crea
 ## Example
 
 ```php
-use TypoConsult\QuickPay\Types\PaymentLinkInput;
+use TypoConsult\Quickpay\Types\PaymentLinkInput;
 
 ...
 

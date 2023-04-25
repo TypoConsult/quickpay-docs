@@ -18,7 +18,7 @@ IP range: **193.162.142.208/28** to allow callback requests from Quickpay.
 **.htaccess example**
 
 ```text
-# QuickPay Callback IPs
+# Quickpay Callback IPs
 Require ip 193.162.142.208/28
 ```
 
@@ -26,7 +26,7 @@ Require ip 193.162.142.208/28
 
 ## Usage
 
-Add the `TypoConsult\QuickPay\CallbackHandler` class to your middleware stack.
+Add the `TypoConsult\Quickpay\CallbackHandler` class to your middleware stack.
 
 ### TYPO3 example
 
@@ -43,7 +43,7 @@ once.
 return [
     'frontend' => [
         'quickpay/process-callback' => [
-            'target' => \TypoConsult\QuickPay\CallbackHandler::class,
+            'target' => \TypoConsult\Quickpay\CallbackHandler::class,
             'after' => [
                 'typo3/cms-frontend/prepare-tsfe-rendering',
             ]
