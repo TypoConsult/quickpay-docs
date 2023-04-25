@@ -9,7 +9,7 @@ A class for specifying the exact fields required for creating payments.
 ## Example
 
 ```php
-use TypoConsult\QuickPay\Types\PaymentInput;
+use TypoConsult\Quickpay\Types\PaymentInput;
 
 ...
 
