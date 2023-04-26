@@ -4,10 +4,10 @@ sidebar_position: 3
 
 # Callback
 
-The package provides a `CallbackHandler` class which is a [PSR-15 Middleware](https://www.php-fig.org/psr/psr-15/). This
+The package provides a `CallbackMiddleware` class which is a [PSR-15 Middleware](https://www.php-fig.org/psr/psr-15/). This
 middleware needs to be added to your project's middleware stack **BEFORE** your custom logic.
 
-It will automatically detect requests coming from Quickpay and enrich the request with some key information for you to
+It will automatically validate requests coming from Quickpay and enrich the request with some key information for you to
 use in your custom logic.
 
 :::tip
@@ -26,30 +26,42 @@ Require ip 193.162.142.208/28
 
 ## Usage
 
-Add the `TypoConsult\Quickpay\CallbackHandler` class to your middleware stack.
+Add the `TypoConsult\Quickpay\Middleware\CallbackMiddleware` class to your middleware stack.
 
-### TYPO3 example
+### TC API example
 
 :::caution
 
-If another extension is already using this, make sure that the `CallbackHandler` is only added to the middleware stack
-once.
+If added to endpoints that are not hit by Quickpay with the Quickpay checksum header, it'll cause every request to fail with a 400 HTTP status code.
 
 :::
 
 ```php
 <?php
 
-return [
-    'frontend' => [
-        'quickpay/process-callback' => [
-            'target' => \TypoConsult\Quickpay\CallbackHandler::class,
-            'after' => [
-                'typo3/cms-frontend/prepare-tsfe-rendering',
-            ]
-        ]
-    ]
-];
+declare(strict_types=1);
+
+namespace TYPOCONSULT\TcBase\Api;
+
+use TypoConsult\Quickpay\Middleware\CallbackMiddleware;
+use TYPOCONSULT\TcApi\Api\Routing\Route;
+use TYPOCONSULT\TcApi\Api\Routing\RouteDefinitionsInterface;
+use TYPOCONSULT\TcApi\Exception\InvalidMiddlewareArgumentException;
+use TYPOCONSULT\TcApi\Exception\RouteAlreadyDefinedException;
+use TYPOCONSULT\TcBase\Api\Handlers\QuickPayCallbackHandler;
+
+class RouteDefinitions implements RouteDefinitionsInterface
+{
+    /**
+     * @throws InvalidMiddlewareArgumentException
+     * @throws RouteAlreadyDefinedException
+     */
+    public function __invoke(): void
+    {
+        Route::post('/quickpay/callback', new QuickPayCallbackHandler(), [new CallbackMiddleware(QUICKPAY_PRIVATE_KEY)]);
+    }
+}
+
 ```
 
 ## Data
