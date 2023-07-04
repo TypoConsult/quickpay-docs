@@ -26,9 +26,8 @@ The direct value can also be used and compared with the enum value, but it is no
 
 ```php
 $data = $request->getAttribute('quickpay');
-$operationType = OperationTypes::from($data['operationType']);
 
-if ($operationType === OperationTypes::CAPTURE && $data['accepted']) {
+if ($data['operationType'] === OperationTypes::CAPTURE && $data['accepted']) {
     // do something on accepted capture operation
 }
 ```
