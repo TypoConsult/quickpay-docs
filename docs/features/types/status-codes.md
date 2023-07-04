@@ -33,9 +33,8 @@ The direct value can also be used and compared with the enum value, but it is no
 
 ```php
 $data = $request->getAttribute('quickpay');
-$statusCode = StatusCodes::from($data['statusCode']);
 
-if ($statusCode === StatusCodes::APPROVED && $data['accepted']) {
+if ($data['statusCode'] === StatusCodes::APPROVED && $data['accepted']) {
     // do something on accepted and approved operation
 }
 ```
