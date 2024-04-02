@@ -14,6 +14,7 @@ from a Quickpay callback.
 | APPROVED                     | 20000 |
 | WAITING_APPROVAL             | 20200 |
 | SECURE_3D_REQUIRED           | 30100 |
+| SCA required                 | 30101 |
 | REJECTED_BY_ACQUIRER         | 40000 |
 | REQUEST_DATA_ERROR           | 40001 |
 | AUTHORIZATION_EXPIRED        | 40002 |
